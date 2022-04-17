@@ -10,6 +10,15 @@
     padding: 8px 15px;
     height: 100%;
   }
+  
+  &.notification {
+    margin-top: 22px;
+    justify-content: center;
+    .ant-badge, .ant-badge a {
+      color: red !important;
+      font-weight: 600;
+    }
+  }
 }
 
 .ant-list-items {

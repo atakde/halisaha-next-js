@@ -7,12 +7,16 @@ import {
   notification,
   Popconfirm,
   message,
+  Modal,
+  Badge,
 } from "antd";
 import {
   DeleteOutlined,
   UserOutlined,
   UserAddOutlined,
+  NotificationOutlined,
 } from "@ant-design/icons";
+import YouTube from "react-youtube";
 
 const PlayerList = (props) => {
   const [data, setData] = useState([]);
@@ -20,6 +24,28 @@ const PlayerList = (props) => {
   const [inputVal, setInputVal] = useState("");
 
   const inputRef = useRef(null);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
 
   useEffect(() => {
     let players = [];
@@ -123,10 +149,6 @@ const PlayerList = (props) => {
     });
   }
 
-  function cancelDelete(e) {
-    //
-  }
-
   return (
     <>
       <div className="input-container">
@@ -143,6 +165,22 @@ const PlayerList = (props) => {
           Add <UserAddOutlined />
         </Button>
       </div>
+      <div className="input-container notification">
+        <Badge dot>
+          <NotificationOutlined style={{ fontSize: 16 }} />
+        </Badge>
+        <Badge>
+          <a onClick={showModal}>Duyurular için tıklayınız!</a>
+        </Badge>
+      </div>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <YouTube videoId="sy6rrQVkpDk" opts={opts} />
+      </Modal>
       <Divider orientation="center">Oyuncu Listesi</Divider>
       <List
         header={
@@ -171,7 +209,6 @@ const PlayerList = (props) => {
               <Popconfirm
                 title="Silmek istiyor musunuz?"
                 onConfirm={(e) => confirmDelete(e, item)}
-                onCancel={cancelDelete}
                 okText="Sil"
                 cancelText="Vazgeç"
               >
