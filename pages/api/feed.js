@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export default async function (req, res) {
-  const prisma = new PrismaClient({ log: ["query"] });
+  const prisma = new PrismaClient({ log:  ['query', 'info', 'warn', 'error'] });
   try {
     const matches = await prisma.match.findMany({
       take: 1,

@@ -1,32 +1,34 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
 }
 
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Match {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int     @id @default(autoincrement())
   match_title String
   match_location String?
   match_type Type @default(NORMAL)
+  participant_limit Int
+  status Int
+  match_date DateTime @db.Timestamptz @default(now())
+  created_at DateTime @db.Timestamptz @default(now())
+
   match_status String
-  match_date DateTime @default(now())
-  created_at DateTime @default(now())
   @@map("matches")
 }
 
 model Player {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int     @id @default(autoincrement())
   name String
-  match_id String
-  created_at DateTime @default(now())
+  match_id Int
+  created_at DateTime @db.Timestamptz @default(now())
   @@unique([name, match_id], map: "player_match_unique_constraint")
   @@map("players")
 }

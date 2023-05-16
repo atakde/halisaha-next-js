@@ -18,7 +18,7 @@ export default async function handle(req, res) {
 // GET /api/player/:id
 async function handleGet(playerId, res) {
   const post = await prisma.player.findUnique({
-    where: { id: playerId },
+    where: { id: parseInt(playerId) },
   });
   res.json(post);
 }
@@ -26,7 +26,7 @@ async function handleGet(playerId, res) {
 // DELETE /api/player/:id
 async function handleDelete(playerId, res) {
   const post = await prisma.player.delete({
-    where: { id: playerId },
+    where: { id: parseInt(playerId) },
   });
   res.json(post);
 }
