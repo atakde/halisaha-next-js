@@ -16,6 +16,9 @@ export default function Home() {
           <Link href="/yuzuncu-yil">
             <a className="ant-btn ant-btn-primary ant-btn-lg">100. Yıl</a>
           </Link>
+          <Link href="/yazilimci-halisahalari">
+            <a className="ant-btn ant-btn-primary ant-btn-lg" style={{ background: '#eee', borderColor: '#ddd', color:'#000' }}>Yazılımcı Halısahaları</a>
+          </Link>
           <Link href="/jotform">
             <a className="ant-btn ant-btn-primary ant-btn-lg" style={{ background: '#28a745', borderColor: '#28a745' }}>Jotform</a>
           </Link>
